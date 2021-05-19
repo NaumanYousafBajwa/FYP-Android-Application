@@ -23,7 +23,7 @@ import java.util.concurrent.ExecutionException;
 
 public class NewProjectScreen extends AppCompatActivity {
 
-    String createProjURL = "http://10.0.2.2:3000/createProject";
+    String createProjURL = getResources().getString(R.string.server_url)+"createProject";
 
     EditText pName, pDesc;
     LinearLayout DL, ML;

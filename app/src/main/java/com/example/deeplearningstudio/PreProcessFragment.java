@@ -1,6 +1,5 @@
 package com.example.deeplearningstudio;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
@@ -15,6 +14,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.gson.JsonObject;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link PreProcessFragment#newInstance} factory method to
@@ -26,13 +33,15 @@ public class PreProcessFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private String projectID = null;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public PreProcessFragment() {
+    public PreProcessFragment(String projID) {
         // Required empty public constructor
+        projectID = projID;
     }
 
     /**
@@ -41,16 +50,15 @@ public class PreProcessFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment PreProcessFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static PreProcessFragment newInstance(String param1, String param2) {
-        PreProcessFragment fragment = new PreProcessFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    public static void newInstance(String param1, String param2) {
+//        PreProcessFragment fragment = new PreProcessFragment(projectID);
+//        Bundle args = new Bundle();
+//        args.putString(ARG_PARAM1, param1);
+//        args.putString(ARG_PARAM2, param2);
+//        fragment.setArguments(args);
+//        return fragment;
     }
 
 
@@ -97,9 +105,42 @@ public class PreProcessFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         //recycler
-        RecyclerView recyclerView = requireView().findViewById(R.id.recyclerListProjects);
+
+        String url = getResources().getString(R.string.server_url)+"getDatasetStaictics?project="+projectID;
+        System.out.println("Columns URL: "+url);
+
+        HttpPostRequest postReq = new HttpPostRequest();
+        String response = null;
+        try {
+            response = postReq.execute("GET", url).get();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Sign In Response: " + response);
+
+        RecyclerView recyclerView = requireView().findViewById(R.id.recyclerColumnList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        //AdopterListView adapter = new AdopterListView();
-        //recyclerView.setAdapter(adapter);
+        ColumnsAdapter adapter = null;
+        try {
+            //JSONArray parsedData = parseColumnsData(new JSONObject(response));
+            adapter = new ColumnsAdapter(new JSONObject(response));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        recyclerView.setAdapter(adapter);
+    }
+
+    private JSONArray parseColumnsData(JSONObject response){
+        try {
+            JSONObject columns_data = response.getJSONObject("data_statistics");
+            JSONObject preproc_opt = response.getJSONObject("preprocessing_options").getJSONObject("column_wise_options");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        return new JSONArray();
     }
 }

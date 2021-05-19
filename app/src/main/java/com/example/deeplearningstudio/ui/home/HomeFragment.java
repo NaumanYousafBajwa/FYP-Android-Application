@@ -27,7 +27,7 @@ import org.json.JSONObject;
 import java.util.concurrent.ExecutionException;
 
 public class HomeFragment extends Fragment {
-    String projectsURL = "http://192.168.0.102:3000/getProjects";
+    String projectsURL = null;
 
     RecyclerView recyclerView;
     AdopterListView adapter;
@@ -43,6 +43,7 @@ public class HomeFragment extends Fragment {
         try {
             HttpPostRequest getReq = new HttpPostRequest();
 
+            projectsURL = getResources().getString(R.string.server_url)+"getProjects";
             String response = getReq.execute("GET",projectsURL).get();
             System.out.println("Project Response " + response);
             JSONArray respArr = new JSONArray(response);

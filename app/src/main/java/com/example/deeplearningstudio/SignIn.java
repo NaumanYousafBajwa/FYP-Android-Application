@@ -27,9 +27,7 @@ import java.util.regex.Pattern;
 
 public class SignIn extends AppCompatActivity {
 
-    String signinUrl = "http://192.168.0.102:3000/signin";
-    String signupUrl = "http://localhost:3000/signup";
-    String signinWithGoogleUrl = "http://10.0.2.2:3000/signinWithGoogle";
+    String signinUrl = null;
 
     EditText email, password;
     TextView signupText;
@@ -133,6 +131,7 @@ public class SignIn extends AppCompatActivity {
 
                     HttpPostRequest postReq = new HttpPostRequest();
 
+                    signinUrl = getResources().getString(R.string.server_url)+"signin";
                     String response = postReq.execute("POST", signinUrl, String.valueOf(post_dict)).get();
                     System.out.println("Sign In Response: " + response);
                     JSONObject obj = new JSONObject(response);

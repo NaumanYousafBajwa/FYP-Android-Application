@@ -20,8 +20,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class SignUp extends AppCompatActivity {
-    String signupUrl = "http://10.0.2.2:3000/signup";
-    String signinWithGoogleUrl = "http://10.0.2.2:3000/signinWithGoogle";
+    String signupUrl = getResources().getString(R.string.server_url)+"signup";
 
     EditText name, email, password;
     TextView signInText;

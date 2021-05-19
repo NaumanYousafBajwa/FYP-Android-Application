@@ -11,12 +11,14 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class BottomNavigationMenu extends AppCompatActivity {
 
+    String ID = null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         Bundle bundle = getIntent().getExtras();
-        String stuff = bundle.getString("projectID");
+        ID = bundle.getString("projectID");
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_bottom_navigation_menu);
@@ -26,9 +28,9 @@ public class BottomNavigationMenu extends AppCompatActivity {
 
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,
-                    new ProjectDescriptionFragment()).commit();
+                    new PreProcessFragment(ID)).commit();
         }
-        System.out.println(stuff);
+        System.out.println(ID);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
@@ -41,7 +43,7 @@ public class BottomNavigationMenu extends AppCompatActivity {
                             selectedFragment = new ProjectDescriptionFragment();
                             break;
                         case R.id.bottom_nav_preprocess:
-                            selectedFragment = new PreProcessFragment();
+                            selectedFragment = new PreProcessFragment(ID);
                             break;
                         case R.id.bottom_nav_visulaize:
                             selectedFragment = new VisualizationFragment();
