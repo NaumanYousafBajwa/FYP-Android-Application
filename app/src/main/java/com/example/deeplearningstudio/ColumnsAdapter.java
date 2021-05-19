@@ -56,7 +56,7 @@ public class ColumnsAdapter extends RecyclerView.Adapter<ColumnsAdapter.ViewHold
 
     @Override
     public int getItemCount() {
-        return projData.length();
+        return columnsData.length();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

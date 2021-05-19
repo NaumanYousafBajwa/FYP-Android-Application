@@ -84,7 +84,7 @@
                     android:id="@+id/recyclerColumnList"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    tools:itemCount="5"
+                    tools:itemCount="25"
                     tools:listitem="@layout/preprocessing_columns" />
             </LinearLayout>
         </ScrollView>
