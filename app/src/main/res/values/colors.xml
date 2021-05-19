@@ -9,6 +9,11 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="background_color">#F8F9FA</color>
-    <color name="primary_color">#1967D2</color>
+    <color name="primary_color">#1967ff</color>
     <color name="secondary_color">#a2d5f2</color>
+    <color name="active_color">#e8f0fe</color>
+    <color name="button_primary">#5e72e4</color>
+    <color name="success">#04de5b</color>
+    <color name="app_background_color">#f5f5f5</color>
+
 </resources>

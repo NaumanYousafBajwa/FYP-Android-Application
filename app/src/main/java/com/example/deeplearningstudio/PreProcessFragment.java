@@ -99,7 +99,7 @@ public class PreProcessFragment extends Fragment {
         //recycler
         RecyclerView recyclerView = requireView().findViewById(R.id.recyclerListProjects);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        AdopterListView adapter = new AdopterListView();
-        recyclerView.setAdapter(adapter);
+        //AdopterListView adapter = new AdopterListView();
+        //recyclerView.setAdapter(adapter);
     }
 }

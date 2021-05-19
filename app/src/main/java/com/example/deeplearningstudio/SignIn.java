@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 
 public class SignIn extends AppCompatActivity {
 
-    String signinUrl = "http://10.0.2.2:3000/signin";
+    String signinUrl = "http://192.168.0.102:3000/signin";
     String signupUrl = "http://localhost:3000/signup";
     String signinWithGoogleUrl = "http://10.0.2.2:3000/signinWithGoogle";
 
@@ -47,6 +47,31 @@ public class SignIn extends AppCompatActivity {
         butt = (Button) findViewById(R.id.signInButton);
         gooButt = (Button) findViewById(R.id.googleButton);
         signupText = (TextView) findViewById(R.id.signUpText);
+
+//        JSONObject post_dict = new JSONObject();
+//        try {
+//            post_dict.put("email", email.getText().toString());
+//            post_dict.put("password", password.getText().toString());
+//
+//            HttpPostRequest postReq = new HttpPostRequest();
+//
+//            String response = postReq.execute(signinUrl, String.valueOf(post_dict)).get();
+//            System.out.println("Sign In Response On INIT: " + response);
+////            JSONObject obj = new JSONObject(response);
+////            System.out.println(obj.getString("text").replace("\\", ""));
+////
+////            if (obj.getString("text").equals("Logged in")) {
+////                Intent intent = new Intent(getApplicationContext(), DashboardActivity.class);
+////                startActivity(intent);
+////            }
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//
+//        } catch (ExecutionException e) {
+//            e.printStackTrace();
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
 
         email.addTextChangedListener(new TextWatcher() {
             @Override
@@ -108,7 +133,7 @@ public class SignIn extends AppCompatActivity {
 
                     HttpPostRequest postReq = new HttpPostRequest();
 
-                    String response = postReq.execute(signinUrl, String.valueOf(post_dict)).get();
+                    String response = postReq.execute("POST", signinUrl, String.valueOf(post_dict)).get();
                     System.out.println("Sign In Response: " + response);
                     JSONObject obj = new JSONObject(response);
                     System.out.println(obj.getString("text").replace("\\", ""));
@@ -119,7 +144,6 @@ public class SignIn extends AppCompatActivity {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-
                 } catch (ExecutionException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {

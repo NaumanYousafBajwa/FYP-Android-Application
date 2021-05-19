@@ -13,11 +13,22 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.deeplearningstudio.AdopterListView;
 import com.example.deeplearningstudio.BottomNavigationMenu;
+import com.example.deeplearningstudio.HttpGetRequest;
+import com.example.deeplearningstudio.HttpPostRequest;
+import com.example.deeplearningstudio.NewProjectScreen;
 import com.example.deeplearningstudio.ProjectDescriptionFragment;
 import com.example.deeplearningstudio.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
 public class HomeFragment extends Fragment {
+    String projectsURL = "http://192.168.0.102:3000/getProjects";
+
     RecyclerView recyclerView;
     AdopterListView adapter;
     FloatingActionButton floatingActionButton;
@@ -28,13 +39,28 @@ public class HomeFragment extends Fragment {
 //recycler
         recyclerView = (RecyclerView) root.findViewById(R.id.recyclerListProjects);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new AdopterListView();
+
+        try {
+            HttpPostRequest getReq = new HttpPostRequest();
+
+            String response = getReq.execute("GET",projectsURL).get();
+            System.out.println("Project Response " + response);
+            JSONArray respArr = new JSONArray(response);
+            adapter = new AdopterListView(respArr);
+        } catch (JSONException e) {
+            e.printStackTrace();
+
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         recyclerView.setAdapter(adapter);
         floatingActionButton= root.findViewById(R.id.floatingActionButton);
         floatingActionButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent =new Intent(getContext(), BottomNavigationMenu.class);
+                Intent intent =new Intent(getContext(), NewProjectScreen.class);
                 startActivity(intent);
             }
         });
