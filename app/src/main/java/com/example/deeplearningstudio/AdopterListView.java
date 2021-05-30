@@ -20,7 +20,6 @@ import java.util.ArrayList;
 
 public class AdopterListView extends RecyclerView.Adapter<AdopterListView.ViewHolder> {
     public JSONArray projData;
-    private String getPID;
 
     public AdopterListView(JSONArray projectData) {
         projData = projectData;
@@ -42,7 +41,27 @@ public class AdopterListView extends RecyclerView.Adapter<AdopterListView.ViewHo
             temp = projData.getJSONObject(position);
             holder.projectName.setText(temp.getString("name"));
             holder.projectDes.setText(temp.getString("domain"));
-            getPID = temp.getString("_id");
+            holder.cardView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    //Log.d("RecyclerView", "onClick：" + getAdapterPosition());
+                    Intent intent = new Intent(holder.cardView.getContext(), BottomNavigationMenu.class);
+
+                    //Create the bundle
+                    Bundle bundle = new Bundle();
+
+                    //Add your data to bundle
+                    try {
+                        bundle.putString("projectID", projData.getJSONObject(position).getString("_id"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
+                    //Add the bundle to the intent
+                    intent.putExtras(bundle);
+                    holder.cardView.getContext().startActivity(intent);
+                }
+            });
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -64,23 +83,7 @@ public class AdopterListView extends RecyclerView.Adapter<AdopterListView.ViewHo
             this.projectDes = itemView.findViewById(R.id.projectDes);
             this.projectName = itemView.findViewById(R.id.projectName);
             cardView = (CardView) itemView.findViewById(R.id.cardView);
-            cardView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Log.d("RecyclerView", "onClick：" + getAdapterPosition());
-                    Intent intent = new Intent(cardView.getContext(), BottomNavigationMenu.class);
 
-                    //Create the bundle
-                    Bundle bundle = new Bundle();
-
-                    //Add your data to bundle
-                    bundle.putString("projectID", getPID);
-
-                    //Add the bundle to the intent
-                    intent.putExtras(bundle);
-                    cardView.getContext().startActivity(intent);
-                }
-            });
         }
 
         @Override

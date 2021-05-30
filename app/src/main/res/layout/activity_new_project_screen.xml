@@ -19,19 +19,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="PROJECT INFO"
+            android:textColor="@color/header"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingBottom="10dp"
+            android:background="@drawable/body_round_border"
+            android:padding="10dp"
             android:orientation="vertical">
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
                 android:orientation="vertical"
                 android:padding="5dp">
 
@@ -40,12 +47,20 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Project Name" />
+                    android:textColor="@color/input_head"
+                    android:text="Project Name"
+                    android:textSize="14sp"
+                    />
 
                 <EditText
                     android:id="@+id/textProjName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@drawable/field_round_border"
+                    android:hint="Enter your project name"
+                    android:textColor="@color/input_color"
+                    android:padding="10dp"
+                    android:textSize="14sp"
                     android:ems="10" />
 
             </LinearLayout>
@@ -62,23 +77,31 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:padding="5dp"
-                    android:text="Project Description" />
+                    android:textColor="@color/input_head"
+                    android:text="Project Description"
+                    android:textSize="14sp"/>
 
                 <EditText
                     android:id="@+id/textProjDesc"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:background="@drawable/field_round_border"
+                    android:hint="Enter your project description"
+                    android:textColor="@color/input_color"
+                    android:padding="10dp"
+                    android:textSize="14sp"
                     android:ems="10" />
             </LinearLayout>
 
         </LinearLayout>
 
         <TextView
-            android:id="@+id/textView20"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="SELECT PROJECT DOMAIN"
+            android:text="PROJECT DOMAIN"
+            android:textColor="@color/header"
+            android:textSize="18sp"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
 
@@ -154,6 +177,7 @@
                         android:layout_weight="1"
                         android:text="Machine \nLearning"
                         android:textAlignment="center"
+                        android:textColor="@color/black"
                         android:textStyle="bold" />
 
                 </LinearLayout>
@@ -166,9 +190,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="15dp"
                 android:backgroundTint="@color/primary_color"
-                android:enabled="false"
+                android:textColor="@color/white"
                 android:text="Create Project" />
 
         </LinearLayout>

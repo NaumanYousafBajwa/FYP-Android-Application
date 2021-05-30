@@ -1,5 +1,7 @@
 package com.example.deeplearningstudio;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.text.TextUtils;
 
